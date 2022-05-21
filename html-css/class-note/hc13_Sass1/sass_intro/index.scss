@@ -1,77 +1,63 @@
-* {
-  margin: 0;
-}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SASS INTRO</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header>
+      <div><img src="./images/sass.png" alt="" /></div>
+      <nav>
+        <ul>
+          <li><a href="#">Browse</a></li>
+          <li><a href="#">Landing</a></li>
+          <li><a href="#">Pages</a></li>
+          <li><a href="#">Account</a></li>
+        </ul>
+      </nav>
+    </header>
 
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: pink;
-  color: white;
-  font-size: 1.2rem;
-}
+    <main>
+      <section class="banner">
+        <article>
+          <h2>Clarusway's Sass Page</h2>
+          <p>
+            SASS is a CSS plugin that is one of the popular, stable and
+            professional level CSS preprocessors.
+          </p>
+          <div class="buttons">
+            <button>Browse Course</button>
+            <button>SASS-SCSS</button>
+          </div>
+        </article>
+        <img src="./images/banner-img.png" alt="" />
+      </section>
 
-header {
-  background-color: #30a7c3;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
+      <section class="cards">
+        <div class="card1">Card1</div>
+        <div class="card2">Card2</div>
+        <div class="card3">Card3</div>
+        <div class="card4">Card4</div>
+      </section>
 
-header img {
-  width: 80px;
-  border: 2px solid rgb(175, 29, 29);
-  border-radius: 10px;
-}
+      <section class="articles">
+        <article class="article1">Article1</article>
+        <article class="article2">Article2</article>
+      </section>
+    </main>
 
-header nav ul {
-  list-style-type: none;
-}
-
-header nav li {
-  display: inline-block;
-}
-
-header nav li:hover {
-  text-decoration: underline;
-}
-
-header nav a {
-  color: white;
-  text-decoration: none;
-  padding: 0.5rem;
-}
-
-main .banner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #cc6699;
-  padding: 1rem;
-  line-height: 2rem;
-}
-
-main button {
-  padding: 0.5rem;
-  background-color: #30a7c3;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  width: 9rem;
-  margin-right: 0.5rem;
-  margin-top: 1.5rem;
-}
-
-main button:hover {
-  background-color: pink;
-  cursor: pointer;
-}
-
-main img {
-  width: 30%;
-  min-width: 300px;
-  max-width: 400px;
-}
-
-/*# sourceMappingURL=index.css.map */
-
-/*# sourceMappingURL=index.scss.map */
+    <footer class="footer">
+      Designed by Clarusway
+      <div class="socialIcons">
+        <div class="social1">S1</div>
+        <div class="social2">S2</div>
+        <div class="social3">S3</div>
+        <div class="social4">S4</div>
+        <div class="social5">S5</div>
+      </div>
+    </footer>
+  </body>
+</html>

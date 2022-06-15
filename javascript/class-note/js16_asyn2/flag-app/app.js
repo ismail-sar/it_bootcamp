@@ -1,58 +1,75 @@
-//*===============================================================
-//*                   4- ASYNC-AWAIT
-//*===============================================================
-//? Async-Await ECMAScript 2017 ile Javascript diline eklenmistir.
-//? Aslinda Promise yapisinin syntax olarak basitlestirilmis halidir.
-//? Bu baglamda sentetik seker benzetmesi yapilabilir.
+//*=========================================================
+//*                     FLAG-APP
+//*=========================================================
 
-//* Bir fonskiyonu asyn hale getirmek icin fonksiyon keyword'nun onune
-//* async keyword'u eklenir.
-
-//* Bir async fonksiyon icerisinde await keyword'u ile yapilan istegin cevabinin
-//* beklenmesi saglanir.
-
-//* Aslinda dizilis olarak senkron mantiga benzeyen kod yazarak Asenkron
-//* kod yazmayı mumkun kilar.
-
-//* Await, promise-temelli herhangi bir fonksiyonun onune getirilerek getirildigi
-//* satirdaki kodun durudurulmasini saglar. Yapilan istek yerine getirilip sonuc
-//* degerlerinin dondurulmesine ile kodun calismasi devam eder.
-
-let hata = false;
-const getUsers = async function () {
-  try {
-    const res = await fetch('https://api.github.com/users');
-    if (!res.ok) {
-      hata = true;
-      // throw new Error(`Something went wrong:${res.status}`);
+const fetchCountry = async (name) => {
+    const url = `https://restcountries.com/v3.1/name/${name}`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        renderError(`Something went wrong:${res.status}`);
+        throw new Error();
+      }
+      const data = await res.json();
+      renderCountry(data[0]);
+    } catch (error) {
+      console.log(error);
     }
-    const data = await res.json();
-    updateDom(data);
-  } catch (error) {
-    console.log(error);
-  } finally {
-    hata = false;
-  }
-};
-
-getUsers();
-
-const updateDom = (data) => {
-  const userDiv = document.querySelector('.users');
-
-  if (hata) {
-    userDiv.innerHTML = `<h1 class="text-danger">Data can not be fetched</h1>
-    <img src="./img/404.png" alt="" />
+  };
+  
+  const renderError = (err) => {
+    const countriesDiv = document.querySelector('.countries');
+    countriesDiv.innerHTML = `
+       <h1 class="text-danger">${err}</h1>
+       <img src="./img/404.png" alt="" />
+      `;
+  };
+  
+  const renderCountry = (country) => {
+    console.log(country);
+    const countriesDiv = document.querySelector('.countries');
+  
+    //!destr
+    const {
+      capital,
+      name: { common },
+      region,
+      flags: { svg },
+      languages,
+      currencies,
+    } = country;
+  
+    // console.log(capital, common, region, svg);
+    // console.log(Object.values(languages));
+    // console.log(Object.values(currencies)[0].name);
+    // console.log(Object.values(currencies)[0].symbol);
+  
+    countriesDiv.innerHTML += `
+  
+    <div class="card shadow-lg" style="width: 18rem;">
+      <img src="${svg}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${common}</h5>
+        <p class="card-text">${region}</p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"> <i class="fas fa-lg fa-landmark"></i> ${capital}</li>
+        <li class="list-group-item"> <i class="fas fa-lg fa-comments"></i> ${Object.values(
+          languages
+        )}</li>
+  
+        <li class="list-group-item"> <i class="fas fa-lg fa-money-bill-wave"></i> ${
+          Object.values(currencies)[0].name
+        }, ${Object.values(currencies)[0].symbol} </li>
+  
+      </ul>
+    </div>
+  
     `;
-  } else {
-    data.forEach((user) => {
-      //!destr
-      const { login, avatar_url, html_url } = user;
-      userDiv.innerHTML += `
-    <h2 class="text-warning">NAME:${login}</h2>
-    <img src=${avatar_url} width="50%" alt="" />
-    <h3>HTML_URL:${html_url}</h3>
-  `;
-    });
-  }
-};
+  };
+  
+  fetchCountry('turkey');
+  fetchCountry('usa');
+  fetchCountry('belgium');
+  fetchCountry('south africa');
+  

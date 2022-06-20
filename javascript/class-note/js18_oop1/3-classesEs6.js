@@ -25,7 +25,20 @@ class Book {
   }
   
   //? instance
-  const book1 = new Book('Kasagi', 'Omer Seyfettin', 1920);
-  const book2 = new Book('Sinekli Bakkal', 'H.Edip Adıvar', 1910);
-  
-  console.log(book1);
+const book1 = new Book('Kasagi', 'Omer Seyfettin', 1920);
+const book2 = new Book('Sinekli Bakkal', 'H.Edip Adıvar', 1910);
+
+console.log(book1);
+
+//? Sub-Class tanimlamasi (Inheritance)
+class Magazine extends Book {
+  constructor(title, author, year, month) {
+    //! Book'un constructor'i cagrildi
+    super(title, author, year); //! Book'un prototpye kopyalnmis oldu
+    this.month = month;
+  }
+}
+
+const mag1 = new Magazine('Kasagi', 'Omer Seyfettin', 1940, 'Nov');
+console.log(mag1);
+console.log(mag1.getSummary());
